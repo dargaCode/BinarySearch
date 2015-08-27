@@ -8,14 +8,22 @@ int get_random_term(int length);
 
 int main (int argc, string argv[])
 {
+    // validate number of  arguments
     if (argc != 2)
     {
-        // validate input
         printf("Usage: ./binarysearch <array size> \n");
         return 1;
     }
 
+    // validate length argument
     int len = atoi(argv[1]);
+    if (len <= 0)
+    {
+        printf("Invalid array size argument \n");
+        return 2;
+    }
+
+
     int data[len];
     fill_array(data, len);
 
