@@ -104,34 +104,43 @@ int search(int arr[], int len, int term)
             high, low, mid, arr[mid], term);
         
         
-        //if arr[mid] = term
-            //return mid
-        //else if arr[mid] > term
+        // found!
+        if (term == arr[mid])
+        {
+            return mid;
+        }
+        // discard top half
+        else if (term < arr[mid])
+        {
             //(for range 2)
-            //if arr[mid] = low
-                //return -1
-            //else
-                //high = mid - 1
-            
-        //else if arr[mid] < term
+            if (mid == low)
+            {
+                return -1;
+            }
+            else
+            {
+                high = mid - 1;
+            }
+        }   
+        // discard bottom half    
+        else if (term > arr[mid])
+        {
             //(for range 2)
-            //if arr[mid] = high 
-                //return -1
-            //else
-                //low = mid + 1
-        
-        //temp
-        low++;
-        high--;
-        
+            if (mid == high) 
+            {
+                return -1;
+            }
+            else
+            {
+                low = mid + 1;
+            }
+        }
         range = high - low;
         mid = low + range / 2;
-        
-        
     }      
     while (range > 1);
       
-    //(range is now 1)
+    // check the final remaining value
     if (arr[low] == term)
     {
         return low;
@@ -140,8 +149,4 @@ int search(int arr[], int len, int term)
     {
         return -1;
     }
-    return 1;
-
 }
-
-
