@@ -1,12 +1,12 @@
 #include <stdio.h>
-#include <cs50.h>
 #include <time.h>
+#include <stdlib.h>
 
 // prototypes
 void fill_array(int arr[], int size);
 int get_random_term(int length);
 
-int main (int argc, string argv[])
+int main (int argc, char* argv[])
 {
     if (argc != 2)
     {
