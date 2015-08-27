@@ -78,10 +78,18 @@ void fill_array(int arr[], int len)
  */
 int get_random_term(int len)
 {
-    return rand() % len;
+    int term = rand() % len;
+    if (term == 0)
+    {
+        //printf("zero bad term! \n");
+        term++;
+    }
+    return term;
 }
 
-
+/*
+ * Perform search and return index or -1 for not found
+ */
 int search(int arr[], int len, int term)
 {
     int low = 0;
@@ -92,8 +100,8 @@ int search(int arr[], int len, int term)
     do
     {
         //temp
-        printf("term: %i, high: %i, low: %i, mid: %i \n",
-            term, high, low, mid);
+        printf("high %i low %i mid %i value %i term %i \n",
+            high, low, mid, arr[mid], term);
         
         
         //if arr[mid] = term
