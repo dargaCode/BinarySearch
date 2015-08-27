@@ -5,6 +5,7 @@
 // prototypes
 void fill_array(int arr[], int size);
 int get_random_term(int length);
+int search(int arr[], int size, int term);
 
 int main (int argc, string argv[])
 {
@@ -23,21 +24,31 @@ int main (int argc, string argv[])
         return 2;
     }
 
-
+    // populate test array
     int data[len];
     fill_array(data, len);
 
     for (int i = 0; i < len; i++)
     {
-    printf("%i \n", data[i]);
+    printf("[%i] %i \n", i, data[i]);
     }
 
+    // generate search term
     int term = get_random_term(len);
     printf("search term %i \n", term);
 
+    // perform search
+    int found_index = search(data, len, term);
+    if (found_index < 0)
+    {
+        printf("Search term %i not found! \n", term);
+    }
+    else {
+        printf("Search term %i found at index %i! \n",
+        term, found_index);
+    }
+
     return 0;
-
-
 }
 
 /*
@@ -69,3 +80,60 @@ int get_random_term(int len)
 {
     return rand() % len;
 }
+
+
+int search(int arr[], int len, int term)
+{
+    int low = 0;
+    int high = len;
+    int range = high - low;
+    int mid = low + range / 2;
+
+    do
+    {
+        //temp
+        printf("term: %i, high: %i, low: %i, mid: %i \n",
+            term, high, low, mid);
+        
+        
+        //if arr[mid] = term
+            //return mid
+        //else if arr[mid] > term
+            //(for range 2)
+            //if arr[mid] = low
+                //return -1
+            //else
+                //high = mid - 1
+            
+        //else if arr[mid] < term
+            //(for range 2)
+            //if arr[mid] = high 
+                //return -1
+            //else
+                //low = mid + 1
+        
+        //temp
+        low++;
+        high--;
+        
+        range = high - low;
+        mid = low + range / 2;
+        
+        
+    }      
+    while (range > 1);
+      
+    //(range is now 1)
+    if (arr[low] == term)
+    {
+        return low;
+    }
+    else
+    {
+        return -1;
+    }
+    return 1;
+
+}
+
+
