@@ -16,6 +16,11 @@ int main (int argc, string argv[])
     }
 
     int len = atoi(argv[1]);
+    // Check for errors
+    if (len == 0) {
+        printf("0 is not a valid length.\n");
+	return 1;
+    }
     int data[len];
     fill_array(data, len);
 
