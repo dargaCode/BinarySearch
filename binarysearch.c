@@ -1,3 +1,4 @@
+#include <stdlib.h>
 #include <stdio.h>
 #include <cs50.h>
 #include <time.h>
@@ -17,7 +18,8 @@ int main (int argc, string argv[])
     }
 
     // validate length argument
-    int len = atoi(argv[1]);
+    int len = strtol(argv[1], NULL, 10); 
+    //int len = atoi(argv[1]);
     if (len <= 0)
     {
         printf("Invalid array size argument \n");
