@@ -37,10 +37,10 @@ int main (int argc, string argv[])
     int found_index = search(data, len, term);
     if (found_index < 0)
     {
-        printf("Search term %i not found! \n", term);
+        printf("\n    Value %i NOT found in array! \n\n", term);
     }
     else {
-        printf("Search term %i found at index %i! \n",
+        printf("\n    Value %i FOUND at array[%i]! \n\n",
         term, found_index);
     }
     return 0;
@@ -112,7 +112,7 @@ int search(int arr[], int len, int term)
         // discard top half
         else if (term < arr[mid])
         {
-            printf("            Look lower! \n");
+            printf("            Look LOWER! \n");
             //(for range 2)
             if (mid == low)
             {
@@ -126,7 +126,7 @@ int search(int arr[], int len, int term)
         // discard bottom half
         else if (term > arr[mid])
         {
-            printf("            Look higher! \n");
+            printf("            Look HIGHER! \n");
             //(for range 2)
             if (mid == high)
             {
