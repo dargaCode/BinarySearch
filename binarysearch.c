@@ -30,7 +30,8 @@ int main (int argc, string argv[])
 
     // generate search term
     int term = get_random_term(len);
-    printf("search term %i \n", term);
+    printf("Array Size: %i \n", len);
+    printf("Random search term: %i \n", term);
 
     // perform search
     int found_index = search(data, len, term);
@@ -42,7 +43,6 @@ int main (int argc, string argv[])
         printf("Search term %i found at index %i! \n",
         term, found_index);
     }
-
     return 0;
 }
 
@@ -51,33 +51,35 @@ int main (int argc, string argv[])
  */
 void fill_array(int arr[], int len)
 {
-    int threshold = 20;
+    int skip_chance = 20;
+    // random seed
     srand(time(NULL));
 
     for (int i = 0, j = 0; i < len; i++)
     {
         int random;
+        //find the next non-skipped integer
         do
         {
             random = rand() % 100;
             j++;
         }
-        while (random < threshold);
+        while (random < skip_chance);
 
         arr[i] = j;
     }
 }
 
 /*
- * Generate the int to search for in the array
+ * Generate the int for which to search
  */
 int get_random_term(int len)
 {
     int term = rand() % len;
+    // no zero allowed
     if (term == 0)
     {
-        //printf("zero bad term! \n");
-        term++;
+        term = 1;
     }
     return term;
 }
@@ -91,19 +93,18 @@ int search(int arr[], int len, int term)
     int high = len - 1;
     int range = 1 + high - low;
     int mid = low + range / 2;
+    int count = 1;
 
     do
-    {
-    
-        //temp
-        for (int i = low; i <= high; i++)
-        {
-            printf("[%i] %i \n", i, arr[i]);
-        }
-    
-        //temp
-        printf("range %i (low %i high %i mid %i) search %i actual %i \n",
-            range, low, high, mid, term, arr[mid]);
+    {        
+        // status update
+        printf("\nLoop %i - Range: %i\n", count, range);
+        printf("    (%i-%i) | Slot %i | (%i-%i)\n",
+            low, mid - 1, mid, mid + 1, high);
+        printf("        Found: %i | Want: %i \n", 
+            arr[mid], term);   
+        
+        // press enter to continue
         char ch;
         scanf("%c",&ch);
         
@@ -115,27 +116,24 @@ int search(int arr[], int len, int term)
         // discard top half
         else if (term < arr[mid])
         {
-            printf("Look lower! \n");
+            printf("            Look lower! \n");
             //(for range 2)
             if (mid == low)
             {
-                printf("bong! \n");
-                return -1;
-                
+                return -1;   
             }
             else
             {
                 high = mid - 1;
             }
-        }   
-        // discard bottom half    
+        }
+        // discard bottom half
         else if (term > arr[mid])
         {
-            printf("Look higher! \n");
+            printf("            Look higher! \n");
             //(for range 2)
-            if (mid == high) 
+            if (mid == high)
             {
-                printf("bing! \n");
                 return -1;
             }
             else
@@ -145,9 +143,10 @@ int search(int arr[], int len, int term)
         }
         range = 1 + high - low;
         mid = low + range / 2;
-    }      
+        count++;
+    }
     while (range > 0);
-      
+
     // check the final remaining value
     if (arr[low] == term)
     {
@@ -155,7 +154,6 @@ int search(int arr[], int len, int term)
     }
     else
     {
-        printf("wtf");
         return -1;
     }
 }
