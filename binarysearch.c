@@ -25,6 +25,11 @@ int main (int argc, string argv[])
         printf("Invalid array size argument \n");
         return 2;
     }
+    //max of 2 million for now
+    if (len > 2000000)
+    {
+        len = 2000000;
+    }
 
     // populate test array
     int data[len];
