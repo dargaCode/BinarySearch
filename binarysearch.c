@@ -28,11 +28,6 @@ int main (int argc, string argv[])
     int data[len];
     fill_array(data, len);
 
-    for (int i = 0; i < len; i++)
-    {
-    printf("[%i] %i \n", i, data[i]);
-    }
-
     // generate search term
     int term = get_random_term(len);
     printf("search term %i \n", term);
@@ -93,16 +88,24 @@ int get_random_term(int len)
 int search(int arr[], int len, int term)
 {
     int low = 0;
-    int high = len;
-    int range = high - low;
+    int high = len - 1;
+    int range = 1 + high - low;
     int mid = low + range / 2;
 
     do
     {
+    
         //temp
-        printf("high %i low %i mid %i value %i term %i \n",
-            high, low, mid, arr[mid], term);
-        
+        for (int i = low; i <= high; i++)
+        {
+            printf("[%i] %i \n", i, arr[i]);
+        }
+    
+        //temp
+        printf("range %i (low %i high %i mid %i) search %i actual %i \n",
+            range, low, high, mid, term, arr[mid]);
+        char ch;
+        scanf("%c",&ch);
         
         // found!
         if (term == arr[mid])
@@ -112,10 +115,13 @@ int search(int arr[], int len, int term)
         // discard top half
         else if (term < arr[mid])
         {
+            printf("Look lower! \n");
             //(for range 2)
             if (mid == low)
             {
+                printf("bong! \n");
                 return -1;
+                
             }
             else
             {
@@ -125,9 +131,11 @@ int search(int arr[], int len, int term)
         // discard bottom half    
         else if (term > arr[mid])
         {
+            printf("Look higher! \n");
             //(for range 2)
             if (mid == high) 
             {
+                printf("bing! \n");
                 return -1;
             }
             else
@@ -135,10 +143,10 @@ int search(int arr[], int len, int term)
                 low = mid + 1;
             }
         }
-        range = high - low;
+        range = 1 + high - low;
         mid = low + range / 2;
     }      
-    while (range > 1);
+    while (range > 0);
       
     // check the final remaining value
     if (arr[low] == term)
@@ -147,6 +155,7 @@ int search(int arr[], int len, int term)
     }
     else
     {
+        printf("wtf");
         return -1;
     }
 }
