@@ -96,18 +96,14 @@ int search(int arr[], int len, int term)
     int count = 1;
 
     do
-    {        
+    {
         // status update
         printf("\nLoop %i - Range: %i\n", count, range);
         printf("    (%i-%i) | Slot %i | (%i-%i)\n",
             low, mid - 1, mid, mid + 1, high);
-        printf("        Found: %i | Want: %i \n", 
-            arr[mid], term);   
-        
-        // press enter to continue
-        char ch;
-        scanf("%c",&ch);
-        
+        printf("        Found: %i | Want: %i \n",
+            arr[mid], term);
+
         // found!
         if (term == arr[mid])
         {
@@ -120,7 +116,7 @@ int search(int arr[], int len, int term)
             //(for range 2)
             if (mid == low)
             {
-                return -1;   
+                return -1;
             }
             else
             {
