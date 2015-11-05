@@ -1,7 +1,7 @@
 # Binary Search
 <strong>Language: C</strong>
 
-Generates a sorted array with randomly missing integers, then selects a random integer and performs a binary search for it.
+Generates a sorted array with some missing integers, then performs a binary search for a random integer.
 
 So many opportunities for off-by-one errors!
 
